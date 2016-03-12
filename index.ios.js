@@ -8,13 +8,34 @@ import React, {
   Component,
   StyleSheet,
   Text,
+  TextInput,
   View
 } from 'react-native';
 
+const CustomKeyboard = require('./CustomKeys');
+
 class ReactAGKeyboard extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      inputText: "getting started",
+      loaded: false,
+    };
+  }
+  onSearchTextChanged(event) {
+    console.log("Text Changed");
+    this.setState({ inputText: event.nativeEvent.text });
+    console.log(this.state.inputText);
+  }
   render() {
+    console.log("Renduer");
     return (
       <View style={styles.container}>
+      <TextInput
+          style={styles.input}
+          value={this.state.inputText}
+          onChange={this.onSearchTextChanged.bind(this)}
+        />
         <Text style={styles.welcome}>
           Hey, Welcome to React Native!
         </Text>
@@ -47,6 +68,14 @@ const styles = StyleSheet.create({
     color: '#333333',
     marginBottom: 5,
   },
+  input: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    width: 150,
+    borderRadius: 4,
+    textAlign: 'center'
+  }
 });
 
 AppRegistry.registerComponent('ReactAGKeyboard', () => ReactAGKeyboard);
