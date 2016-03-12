@@ -7,7 +7,7 @@
 //
 
 #import "KeyboardViewController.h"
-#import <RCTRootView.h>
+#import "ReactView.h"
 
 @interface KeyboardViewController ()
 @property (nonatomic, strong) UIButton *nextKeyboardButton;
@@ -15,22 +15,7 @@
 
 @implementation KeyboardViewController
 
-- (void)loadView {
-  
-  // hardcoding our JS to be served from the dev server while we're
-  // experimenting with the share extension setup
-  NSURL *jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios&dev=true"];
-  
-  // attempt to initialize an RCTRootView and use it as the root view of our
-  // plain ‘ol UIViewController
-  RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
-                                                      moduleName:@"ReactAGKeyboard"
-                                               initialProperties:nil
-                                                   launchOptions:nil];
-  self.view = rootView;
-}
 
-/*
 - (void)updateViewConstraints {
     [super updateViewConstraints];
     
@@ -38,22 +23,28 @@
 }
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    // Perform custom UI setup here
-    self.nextKeyboardButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    
-    [self.nextKeyboardButton setTitle:NSLocalizedString(@"Next Keyboard", @"Title for 'Next Keyboard' button") forState:UIControlStateNormal];
-    [self.nextKeyboardButton sizeToFit];
-    self.nextKeyboardButton.translatesAutoresizingMaskIntoConstraints = NO;
-    
-    [self.nextKeyboardButton addTarget:self action:@selector(advanceToNextInputMode) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.view addSubview:self.nextKeyboardButton];
-    
-    NSLayoutConstraint *nextKeyboardButtonLeftSideConstraint = [NSLayoutConstraint constraintWithItem:self.nextKeyboardButton attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeft multiplier:1.0 constant:0.0];
-    NSLayoutConstraint *nextKeyboardButtonBottomConstraint = [NSLayoutConstraint constraintWithItem:self.nextKeyboardButton attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0.0];
-    [self.view addConstraints:@[nextKeyboardButtonLeftSideConstraint, nextKeyboardButtonBottomConstraint]];
+  [super viewDidLoad];
+  NSLog(@"--------------------- Load View");
+  CGRect viewRect = CGRectMake(10, 10, 100, 100);
+  ReactView *reactView = [[ReactView alloc] initWithFrame:viewRect];
+  
+  
+  // Perform custom UI setup here
+  self.nextKeyboardButton = [UIButton buttonWithType:UIButtonTypeSystem];
+  
+  [self.nextKeyboardButton setTitle:NSLocalizedString(@"Next Keyboard", @"Title for 'Next Keyboard' button") forState:UIControlStateNormal];
+  [self.nextKeyboardButton sizeToFit];
+  self.nextKeyboardButton.translatesAutoresizingMaskIntoConstraints = NO;
+  
+  [self.nextKeyboardButton addTarget:self action:@selector(advanceToNextInputMode) forControlEvents:UIControlEventTouchUpInside];
+  
+  [self.view addSubview:self.nextKeyboardButton];
+  
+  NSLayoutConstraint *nextKeyboardButtonLeftSideConstraint = [NSLayoutConstraint constraintWithItem:self.nextKeyboardButton attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeft multiplier:1.0 constant:0.0];
+  NSLayoutConstraint *nextKeyboardButtonBottomConstraint = [NSLayoutConstraint constraintWithItem:self.nextKeyboardButton attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0.0];
+  [self.view addConstraints:@[nextKeyboardButtonLeftSideConstraint, nextKeyboardButtonBottomConstraint]];
+  
+  [self.view addSubview:reactView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -76,6 +67,6 @@
     }
     [self.nextKeyboardButton setTitleColor:textColor forState:UIControlStateNormal];
 }
-*/
+
 
 @end

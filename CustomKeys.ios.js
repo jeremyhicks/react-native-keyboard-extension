@@ -13,6 +13,7 @@ import React, {
 
 class CustomKeyboard extends Component {
   render() {
+    console.log("Custom Keyboard");
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
@@ -25,15 +26,21 @@ class CustomKeyboard extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 2,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#ff0000',
+    borderWidth: 1,
+    borderRadius: 5,
+    borderStyle: 'dashed',
+    borderColor: '#4345ee',
+    height: 150,
   },
   welcome: {
     fontSize: 20,
     textAlign: 'center',
-    margin: 10,
+    margin: 20,
+    height: 60,
   },
   instructions: {
     textAlign: 'center',
@@ -42,4 +49,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('CustomKeyboard', () => CustomKeyboard);
+module.exports = CustomKeyboard;
